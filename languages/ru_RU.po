@@ -1,0 +1,188 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: White Turtle\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: Sun Jul 17 2016 11:44:41 GMT+0300 (MSK)\n"
+"PO-Revision-Date: Sun Jul 17 2016 12:07:36 GMT+0300 (MSK)\n"
+"Last-Translator: admin <khatybov@icloud.com>\n"
+"Language-Team: \n"
+"Language: Russian\n"
+"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10 >= 2 && "
+"n%10<=4 &&(n%100<10||n%100 >= 20)? 1 : 2)\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Poedit-SourceCharset: UTF-8\n"
+"X-Poedit-Basepath: .\n"
+"X-Poedit-SearchPath-0: .\n"
+"X-Poedit-KeywordsList: _:1;gettext:1;dgettext:2;ngettext:1,2;dngettext:2,3;"
+"__:1;_e:1;_c:1;_n:1,2;_n_noop:1,2;_nc:1,2;__ngettext:1,2;__ngettext_noop:1,2;"
+"_x:1,2c;_ex:1,2c;_nx:1,2,4c;_nx_noop:1,2,3c;_n_js:1,2;_nx_js:1,2,3c;"
+"esc_attr__:1;esc_html__:1;esc_attr_e:1;esc_html_e:1;esc_attr_x:1,2c;"
+"esc_html_x:1,2c;comments_number_link:2,3;t:1;st:1;trans:1;transChoice:1,2\n"
+"X-Generator: Loco - https://localise.biz/\n"
+"X-Loco-Target-Locale: ru_RU"
+
+#: 404.php:9
+msgid "It looks like nothing was found at this location. Maybe try a search?"
+msgstr "Похоже здесь ничего нет. Может быть Вам поможет поиск?"
+
+#: comments-walker.php:30
+msgid "Comment by author"
+msgstr "Комментарий автора"
+
+#: comments-walker.php:38
+msgid "Your comment is awaiting moderation."
+msgstr "Ваш комментарий ожидает проверки."
+
+#: comments-walker.php:50
+msgid "Link to comment"
+msgstr "Ссылка на комментарий."
+
+#: comments-walker.php:73
+msgid "Pingback:"
+msgstr "Пингбэки:"
+
+#: comments.php:13
+msgid "Comments:"
+msgstr "Комментарии:"
+
+#: comments.php:35
+msgid "Comments are closed."
+msgstr "Комментарии закрыты."
+
+#: functions.php:12
+msgid "Top primary menu"
+msgstr "Главное меню"
+
+#: functions.php:65
+msgid "Widget Area"
+msgstr "Область виджетов"
+
+#: functions.php:130
+msgid "Open in new window"
+msgstr "Открыть в новом окне"
+
+#: functions.php:131
+msgid "More"
+msgstr "Еще"
+
+#: functions.php:153
+msgid ""
+"This content is password protected. To view it please enter your password "
+"below:"
+msgstr "Содержимое защищено паролем. Пожалуйста, введите пароль:"
+
+#: functions.php:154
+msgid "Enter the password"
+msgstr "Ввести пароль"
+
+#: functions.php:176
+msgid "Read More..."
+msgstr "Читать далее..."
+
+#: functions.php:545
+#, php-format
+msgid "Search Results for: %s"
+msgstr "Результаты поиска для: %s"
+
+#: functions.php:547
+#, php-format
+msgid "%s results found"
+msgstr "Надено: %s"
+
+#: functions.php:550
+msgid "Oops! That page can&rsquo;t be found."
+msgstr "Ой! Такой страницы не существует."
+
+#: functions.php:650
+msgid "The post has no content"
+msgstr "Эта запись без контента"
+
+#: functions.php:658
+msgid "Ready to publish your first post?"
+msgstr "Опубликуете первую запись?"
+
+#: functions.php:662
+msgid ""
+"Sorry, but nothing matched your search terms. Please try again with some "
+"different keywords."
+msgstr "По этому запросу ничего не найдено. Попробуйте использовать другие слова."
+
+#: functions.php:668
+msgid ""
+"It seems we can&rsquo;t find what you&rsquo;re looking for. Perhaps "
+"searching can help."
+msgstr "Похоже мы не нашли то, что Вы искали. Поиск может помочь."
+
+#: functions.php:691
+msgid "Go to post"
+msgstr "К записи."
+
+#: functions.php:798
+msgid "Format: "
+msgstr "Формат: "
+
+#: functions.php:940
+msgid "to"
+msgstr "ответил"
+
+#: functions.php:949
+#, php-format
+msgid "%1$s at %2$s"
+msgstr "%1$s в %2$s"
+
+#: functions.php:974
+msgid "Reply"
+msgstr "Ответить"
+
+#: functions.php:975
+#, php-format
+msgid "Reply to %s"
+msgstr "Ответить %s"
+
+#: functions.php:976 /functions.php:1006
+msgid "Log in to Reply"
+msgstr "Войти на сайт, чтобы ответить"
+
+#: functions.php:1038
+msgid "Edit"
+msgstr "Редактировать"
+
+#: searchform.php:5
+msgctxt "placeholder"
+msgid "Search &hellip;"
+msgstr "Искать &hellip;"
+
+#: sidebar.php:31
+msgid "Widgets"
+msgstr "Виджеты"
+
+#: template-parts/content-none.php:4
+msgid "Nothing Found"
+msgstr "Ничего не найдено"
+
+#: template-parts/site-footer.php:4
+#, php-format
+msgid "Proudly powered by %s"
+msgstr "Сделано с удовольствием"
+
+#. Name of the theme
+msgid "White Turtle"
+msgstr "Белая Черепаха"
+
+#. Theme URI of the theme
+msgid "http://IgorKh.com/white-turtle/"
+msgstr "http://IgorKh.com/white-turtle/"
+
+#. Description of the theme
+msgid "Minimalistic theme with content priority"
+msgstr "Минималистичная тема с приоритетом на контент "
+
+#. Author of the theme
+msgid "Igor Khatybov"
+msgstr "Игорь Хатыбов"
+
+#. Author URI of the theme
+msgid "http://IgorKh.com/"
+msgstr "http://IgorKh.com/"

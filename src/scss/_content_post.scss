@@ -1,0 +1,286 @@
+//content-none and 404 page
+.no-results-title,
+.no-results-text,
+.no-results-search,
+.error-404-search,
+.error-404-icon {
+  margin: 40px 0;
+}
+
+//404
+.error-404-icon {
+  padding-left: 20px;
+  box-sizing: border-box;
+  font-size: 5em;
+}
+
+//post content wrapper
+.post-content__wrapper {
+  position: relative;
+  overflow: hidden;
+  margin: 10px 0;
+
+  &.post-content__wrapper-open {
+    padding-bottom: 22px;
+
+    .post-content__shadow,
+    .post-content__show {
+      display: block;
+    }
+  }
+}
+
+//Hidden content in archive
+.post-content__shadow {
+  display: none;
+  position: absolute;
+  width: 100%;
+  height: 90px;
+  left: 0;
+  bottom: 0;
+  background: linear-gradient(to bottom, rgba(255, 255, 255, 0.01) 0%, rgba(255, 255, 255, 0.31) 16%, rgba(255, 255, 255, 0.81) 42%, rgba(255, 255, 255, 1) 52%, rgba(255, 255, 255, 1) 100%);
+}
+
+.post-content__show {
+  display: none;
+  position: absolute;
+  width: 80%;
+  bottom: 0;
+  left: 10%;
+  border-top: 1px solid rgba($color-blue-light, .2);
+  outline: none;
+  font-size: .8em;
+  padding: 1px 3px;
+  color: $color-blue-dark;
+  @include transition(background-color);
+
+  span:before {
+    content: '\f431';
+  }
+
+  &:hover,
+  &:focus {
+    color: $color-blue-dark;
+  }
+
+  &:hover {
+    background-color: rgba($color-blue-light, .07);
+  }
+}
+
+.post-content__show-open {
+  span:before {
+    content: '\f432';
+  }
+}
+
+//content
+.post-content {
+  //general
+  line-height: $content-line-height;
+
+  &:not(.no-results-content) > *:first-child {
+    &:not(.wp-playlist) {
+      margin-top: 0;
+      padding-top: 0;
+    }
+  }
+
+  blockquote {
+    opacity: .9;
+  }
+
+  a {
+    img {
+      opacity: 1;
+      @include transition(opacity);
+
+      &:hover {
+        opacity: .85;
+      }
+    }
+  }
+
+  .wp-caption-text {
+    font-style: italic;
+    font-size: .8em;
+  }
+
+  .aligncenter {
+    display: block;
+    margin: 15px auto;
+  }
+
+  .alignleft,
+  .alignleft {
+    &.wp-caption {
+      margin-bottom: .5em;
+    }
+  }
+
+  .alignleft {
+    float: left;
+    margin: 0.375em 1.75em 1.75em 0;
+  }
+
+  .alignright {
+    float: right;
+    margin: 0.375em 0 1.75em 1.75em;
+  }
+
+  //gallery
+  .gallery {
+    margin: 0 -1.1666667% 1.75em;
+
+    &:last-child {
+      margin-bottom: 0;
+    }
+  }
+
+  .gallery-item {
+    display: inline-block;
+    box-sizing: border-box;
+    max-width: 33.33%;
+    padding: 0 1.1400652% 2.2801304%;
+    text-align: center;
+    vertical-align: top;
+    width: 100%;
+  }
+
+  //hide caption on small screen
+  @mixin hide-caption() {
+    .gallery-caption {
+      display: none;
+    }
+  }
+
+  @for $i from 1 through 9 {
+    .gallery-columns-#{$i} {
+      .gallery-item {
+        max-width: percentage(1 / $i);
+
+        @if $i==3 {
+          @media all and (max-width: 450px) {
+            @include hide-caption;
+          }
+        }
+
+        @if $i==4 {
+          @media all and (max-width: 600px) {
+            @include hide-caption;
+          }
+        }
+
+        @if $i==5 {
+          @media all and (max-width: 700px) {
+            @include hide-caption;
+          }
+        }
+
+        @if $i > 5 {
+          @include hide-caption;
+        }
+      }
+    }
+
+  }
+
+  .gallery-caption {
+    display: block;
+    font-size: 0.8125rem;
+    font-style: italic;
+    line-height: 1.6153846154;
+    padding-top: 0.5384615385em;
+  }
+
+  //attachment page. download file
+  .attachment-link {
+    display: inline-block;
+    vertical-align: middle;
+    line-height: 1;
+    font-size: 1.5em;
+  }
+  .genericon-download-icon {
+    font-size: 1.5em;
+  }
+
+  //attachment page. image
+  .single-attachment-image {
+    text-align: center;
+  }
+
+  .attachment-image-resolution {
+    font-size: .7em;
+    display: block;
+  }
+
+}
+
+//see more link
+.post-see-more {
+  text-align: right;
+}
+
+//playlist
+.wp-playlist-light {
+
+  .wp-playlist-item {
+
+    &:hover {
+      background-color: rgba($color-blue-light, .05);
+    }
+  }
+
+  .wp-playlist-playing {
+    &,
+    &:hover {
+      background-color: rgba($color-blue-light, .1);
+    }
+  }
+
+  .wp-playlist-caption,
+  .wp-playlist-item-length {
+    color: $color-gray-light;
+  }
+}
+
+.wp-playlist-dark {
+  background-color: rgba(black, .7);
+
+  .wp-playlist-caption {
+    color: #fff;
+  }
+
+  .wp-playlist-item {
+    &:hover {
+      background-color: rgba(#000, .4);
+    }
+  }
+
+  .wp-playlist-playing {
+    &,
+    &:hover {
+      background-color: #000;
+    }
+  }
+
+}
+
+.wp-playlist-playing {
+  font-weight: 400;
+}
+
+.wp-playlist-current-item {
+
+  .wp-playlist-caption {
+    padding-top: 0;
+  }
+}
+
+.wp-playlist-caption {
+  padding: 8px 0;
+}
+
+.wp-playlist-item-length {
+  top: 9px
+}
