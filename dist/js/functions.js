@@ -131,7 +131,7 @@
                     .html(selfLink)
                     .append(button.next().children().clone());
 
-                addSubMenu(menuContainer,'sub-menu');
+                addSubMenu(menuContainer, 'sub-menu');
             }
 
             //click handler
@@ -244,7 +244,7 @@
             //button html
             var buttonHtml = '' +
                 '<li class="' + sn.wrapper + ' ' + sn.wrapperHidden + '">' +
-                '<a href="#" class="' + sn.button + '">'+globalVars.translate["more"]+'<span class="genericon"></span></a>' +
+                '<a href="#" class="' + sn.button + '">' + globalVars.translate["more"] + '<span class="genericon"></span></a>' +
                 '</li>';
 
             //container html, where menu will be cloned
@@ -471,7 +471,7 @@
         function ResponsiveData(navMenu, items, exclude) {
 
             //array will contain menu items width
-            var itemsWidth=[];
+            var itemsWidth = [];
 
             //get item width
             items.each(function () {
@@ -536,25 +536,88 @@
         //Where dynamic menus, like mobile etc. will be cloned
         var menuContainer = $('.menu-container');
         //control buttons, like search and widgets
-        var sidebarControls= $('.sidebar-controls');
+        var sidebarControls = $('.sidebar-controls');
         //where widgets are. Needs for sub menu handler
         var widgetContent = $('.widgets-container-content');
 
         //call objects. The order is important
         //main menu
         var navMenu = new NavMenu();
-        //mobile menu
-        var mobileMenu = new MobileMenu(navMenu.menu, sidebarNav, menuContainer);
-        //responsive menu ('More' button)
-        var responsiveMenu = new ResponsiveMenu(navMenu.menu, menuContainer);
+
         //sub menu
         var subMenu = new SubMenu();
 
-        //add sub menu handler to all sub-menus
-        subMenu.add(menuContainer, 'sub-menu');
+        if (navMenu.menu.length) {
+            //mobile menu
+            var mobileMenu = new MobileMenu(navMenu.menu, sidebarNav, menuContainer);
+            //responsive menu ('More' button)
+            var responsiveMenu = new ResponsiveMenu(navMenu.menu, menuContainer);
 
-        //call handler of original menus sub-menu
-        var subMenuTop = new SubMenuTop(navMenu.menu, menuContainer, subMenu.add);
+            //add sub menu handler to all sub-menus
+            subMenu.add(menuContainer, 'sub-menu');
+
+            //call handler of original menus sub-menu
+            var subMenuTop = new SubMenuTop(navMenu.menu, menuContainer, subMenu.add);
+
+            //get all responsive data
+            var responsiveData = new ResponsiveData(
+                navMenu.menu,
+                navMenu.menu.children('.menu-item'),
+                [
+                    $(responsiveMenu.wrapper).outerWidth(true),
+                    //FIXME safari doesn't handle properly
+                    sidebarControls.outerWidth(true)
+                ],
+                3
+            );
+
+            //handle which menu must be shown
+            function handleMenu() {
+
+                var visibleItems = responsiveData.visibleItems();
+
+                if (visibleItems < 3) {
+                    cleanSections();
+                    mobileMenu.show();
+                    navMenu.hide();
+                    responsiveMenu.reset();
+
+                } else {
+                    mobileMenu.hide();
+                    navMenu.show();
+                    responsiveMenu.handle(visibleItems);
+                }
+            }
+
+            handleMenu();
+
+            //header sub menu button handler
+            body.on('click', subMenuTop.wrapper + '>a', function (event) {
+                event.preventDefault();
+                cleanSections('subMenuTop');
+                subMenuTop.click($(this));
+            });
+
+            //mobile menu button handler
+            body.on('click', mobileMenu.button, function () {
+                cleanSections('mobileMenu');
+                mobileMenu.click();
+            });
+
+            //responsive menu button handler
+            body.on('click', responsiveMenu.button, function (event) {
+                event.preventDefault();
+                cleanSections('responsiveMenu');
+                responsiveMenu.click();
+            });
+
+            //handle window resize
+            $(window).resize(function () {
+                handleMenu();
+            });
+        }
+
+
         //search
         var search = new Search();
         //widgets
@@ -564,22 +627,23 @@
         subMenu.add(widgetContent, 'sub-menu');
         subMenu.add(widgetContent, 'children');
 
-        //get all responsive data
-        var responsiveData = new ResponsiveData(
-            navMenu.menu,
-            navMenu.menu.children('.menu-item'),
-            [
-                $(responsiveMenu.wrapper).outerWidth(true),
-                //FIXME safari doesn't handle properly
-                sidebarControls.outerWidth(true)
-            ],
-            3
-        );
 
         //Before opening any menu, other menus must be closed
         //FIXME when switching mobile menu and original, search and widgets must be not closing
         function cleanSections(exclude) {
             subMenu.reset(menuContainer);
+
+            if (exclude !== 'search') {
+                search.close();
+            }
+            if (exclude !== 'widgets') {
+                widgets.close();
+            }
+
+            if (!navMenu.menu.length) {
+                return;
+            }
+
             if (exclude !== 'subMenuTop') {
                 subMenuTop.close();
             }
@@ -589,57 +653,14 @@
             if (exclude !== 'responsiveMenu') {
                 responsiveMenu.close();
             }
-            if (exclude !== 'search') {
-                search.close();
-            }
-            if (exclude !== 'widgets') {
-                widgets.close();
-            }
         }
 
-        //handle which menu must be shown
-        function handleMenu() {
-            var visibleItems = responsiveData.visibleItems();
-
-            if (visibleItems < 3) {
-                cleanSections();
-                mobileMenu.show();
-                navMenu.hide();
-                responsiveMenu.reset();
-
-            } else {
-                mobileMenu.hide();
-                navMenu.show();
-                responsiveMenu.handle(visibleItems);
-            }
-        }
-
-        handleMenu();
 
         //sub menu button handler
         body.on('click', subMenu.button, function () {
             subMenu.click($(this));
         });
 
-        //header sub menu button handler
-        body.on('click', subMenuTop.wrapper + '>a', function (event) {
-            event.preventDefault();
-            cleanSections('subMenuTop');
-            subMenuTop.click($(this));
-        });
-
-        //mobile menu button handler
-        body.on('click', mobileMenu.button, function () {
-            cleanSections('mobileMenu');
-            mobileMenu.click();
-        });
-
-        //responsive menu button handler
-        body.on('click', responsiveMenu.button, function (event) {
-            event.preventDefault();
-            cleanSections('responsiveMenu');
-            responsiveMenu.click();
-        });
 
         //search button handler
         search.button.click(function () {
@@ -653,10 +674,6 @@
             widgets.click();
         });
 
-        //handle window resize
-        $(window).resize(function () {
-            handleMenu();
-        });
 
     })();
 
@@ -804,7 +821,6 @@
                 $this
                     .addClass(sn.wrapperOpen)
                     .css({height: defaultHeight});
-                console.log('asdasd');
             }
         });
 
