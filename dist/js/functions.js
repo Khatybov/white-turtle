@@ -801,6 +801,12 @@
 
     //hide contents when its height big enough
     (function () {
+
+        //if it is singular page, return
+        if($('body').hasClass('singular')){
+            return;
+        }
+
         //selector names
         var sn = {
                 content: 'post-content',
